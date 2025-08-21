@@ -25,12 +25,18 @@
                       : "Not Available";
           const accuracy = position.coords.accuracy.toFixed(2) + " m";
 
-          document.getElementById("coords").innerHTML = `
-            Latitude: <span class="value">${lat}</span><br>
-            Longitude: <span class="value">${lon}</span><br>
-            Altitude: <span class="value">${alt}</span><br>
-            Accuracy: <span class="value">${accuracy}</span>
-          `;
+        //   document.getElementById("coords").innerHTML = `
+        //     Latitude: <span class="value">${lat}</span><br>
+        //     Longitude: <span class="value">${lon}</span><br>
+        //     Altitude: <span class="value">${alt}</span><br>
+        //     Accuracy: <span class="value">${accuracy}</span>
+        //   `;
+
+        console.log("lat"+" "+lat);
+        console.log("lon"+" "+lon);
+        console.log("alt"+" "+alt);
+        console.log("acc"+" "+accuracy);
+        
         },
         error => {
           document.getElementById("coords").innerHTML = 
