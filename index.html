@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D GPS Tracker</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+    #coords { font-size: 1.2em; margin-top: 20px; }
+    .value { font-weight: bold; color: #007bff; }
+  </style>
+</head>
+<body>
+  <h1> 3D GPS Tracker</h1>
+  <div id="coords">Fetching location...</div>
+
+  <script>
+    if ("geolocation" in navigator) {
+      navigator.geolocation.watchPosition(
+        position => {
+          const lat = position.coords.latitude.toFixed(6);
+          const lon = position.coords.longitude.toFixed(6);
+          const alt = position.coords.altitude !== null 
+                      ? position.coords.altitude.toFixed(2) + " m"
+                      : "Not Available";
+          const accuracy = position.coords.accuracy.toFixed(2) + " m";
+
+          document.getElementById("coords").innerHTML = `
+            Latitude: <span class="value">${lat}</span><br>
+            Longitude: <span class="value">${lon}</span><br>
+            Altitude: <span class="value">${alt}</span><br>
+            Accuracy: <span class="value">${accuracy}</span>
+          `;
+        },
+        error => {
+          document.getElementById("coords").innerHTML = 
+            "Error getting location: " + error.message;
+        },
+        { enableHighAccuracy: true, maximumAge: 1000 }
+      );
+    } else {
+      document.getElementById("coords").innerHTML = 
+        "Geolocation is not supported by your browser.";
+    }
+  </script>
+</body>
+</html>
